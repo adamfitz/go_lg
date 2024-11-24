@@ -3,25 +3,57 @@ package main
 import (
 	"html/template"
 	"log"
-	"net/http"
 	"net"
-	"os/exec"
+	"net/http"
 )
-
 
 var tmpl = template.Must(template.New("tmpl").ParseFiles("assets/index.html"))
 
-
-func execCommandHandler(w http.ResponseWriter, r *http.Request) {
-	// Print working directory
-	output, err := exec.Command("pwd").Output()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+func execActionCommandHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
 	}
-	w.Write(output) // write command output to the response
+
+	// Parse the form data
+	if err := r.ParseForm(); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Get the selected query type
+	query := r.FormValue("query")
+
+	// Route to the corresponding function based on query value
+	switch query {
+	case "bgp":
+		handleBGP(w, r)
+	case "summary":
+		handleBGPSummary(w, r)
+	case "ping":
+		handlePing(w, r)
+	case "trace":
+		handleTrace(w, r)
+	default:
+		http.Error(w, "Invalid query type", http.StatusBadRequest)
+	}
 }
 
+func handleBGP(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("BGP handler executed"))
+}
+
+func handleBGPSummary(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("BGP Summary handler executed"))
+}
+
+func handlePing(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Ping handler executed"))
+}
+
+func handleTrace(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Trace handler executed"))
+}
 
 func homePageHandler(w http.ResponseWriter, r *http.Request) {
 	// get client ip (removing the port) from the request
@@ -36,10 +68,9 @@ func homePageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-
 func main() {
 	http.HandleFunc("/", homePageHandler)
-	http.HandleFunc("/exec", execCommandHandler)
+	http.HandleFunc("/execAction", execActionCommandHandler)
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets"))))
 	log.Fatal(http.ListenAndServe("0.0.0.0:9000", nil))
 }
