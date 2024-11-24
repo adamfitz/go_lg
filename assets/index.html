@@ -1,0 +1,115 @@
+<HTML>
+<style type="text/css">
+        html, body, p, table, td, th, h1, h2, h3, h4, a {
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: #FFFFFF;
+        }
+        a,
+        a:link,
+        a:visited {
+                color: #444444;
+                text-decoration: none;
+                }
+        a:hover,
+        a:active {
+                color: #0400ee;
+                }
+        h1,h2,h3,h4,h5,h6 {
+        color: #0400ee;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                }
+        hr { display: none; }
+        th  { background-color: #0400ee; font-weight:bold; color: #FFFFFF; }
+        .lgtable td { background-color: #F5F5F5; }
+        pre code a { font-family: monospace} 
+        body,html { background-color: #F3F3F3; } 
+</style>
+<TITLE>Looking Glass</TITLE>
+<HEAD>
+<script type="text/javascript">
+        function makeDisable(){
+        document.getElementsByName('router')[0].disabled=true
+        }
+        function makeEnable(){
+        document.getElementsByName('router')[0].disabled=false
+        }
+</script>
+</HEAD>
+<br><br><br>
+<div style="border: 1px solid #0400ee; margin-left: auto; margin-right: auto; width:80%; padding: 30px; background-color: #FFFFFF;">
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+<TABLE BORDER="0" WIDTH="100%"><TR><TD Align="center"><A HREF="http://https://pkg.go.dev/"><IMG SRC="./assets/goLg.png" BORDER="0" ALT="LG"></A></TD></TR></TABLE>
+<CENTER>
+<H2>Looking Glass</H2>
+</CENTER>
+<P>
+<HR SIZE=2 WIDTH="85%" NOSHADE>
+<P>
+<FORM METHOD="POST" ACTION="/lg.cgi">
+<CENTER>
+<TABLE BORDER=0 class="lgtable"><TR><TD class="lgtable">
+<TABLE BORDER=0 CELLPADDING=4 CELLSPACING=0 class="lgtable">
+<TR>
+<TH BGCOLOR="#000000" NOWRAP>Type of Query</FONT></TH>
+<TH BGCOLOR="#000000" NOWRAP>Additional parameters</FONT></th>
+<TH BGCOLOR="#000000" NOWRAP>Node</FONT></TH></TR>
+<TR><TD class="lgtable">
+<TABLE BORDER=0 CELLPADDING=4 CELLSPACING=0 class="lgtable">
+        <TR><TD class="lgtable"><INPUT TYPE="radio" NAME="query" VALUE="bgp" onClick="makeDisable()"></TD><TD class="lgtable">&nbsp;bgp</TD></TR>
+        <TR><TD class="lgtable"><INPUT TYPE="radio" NAME="query" VALUE="summary" onClick="makeDisable()"></TD><TD class="lgtable">&nbsp;bgp&nbsp;summary</TD></TR>
+        <TR><TD class="lgtable"><INPUT TYPE="radio" NAME="query" VALUE="ping" onClick="makeEnable()"></TD><TD class="lgtable">&nbsp;ping</TD></TR>
+        <TR><TD class="lgtable"><INPUT TYPE="radio" NAME="query" VALUE="trace"  onClick="makeEnable()"></TD><TD class="lgtable">&nbsp;trace</TD></TR>
+        <TR><TD class="lgtable"></TD><TD class="lgtable"><SELECT NAME="protocol">
+        <OPTION VALUE="IPv4"> IPv4
+        <OPTION VALUE="IPv6"> IPv6
+        </SELECT></TD></TR>
+</TABLE>
+</TD>
+<TD class="lgtable" ALIGN="CENTER">&nbsp;<BR><INPUT NAME="addr" SIZE="30"><BR><FONT SIZE="-1">&nbsp;<SUP>&nbsp;</SUP>&nbsp;</FONT></TD>
+<TD class="lgtable" ALIGN="RIGHT">&nbsp;<BR><SELECT NAME="router" disabled="true" >
+<OPTGROUP LABEL="BGP Queries">
+<OPTION VALUE="AS...view"> AS... view
+</OPTGROUP>
+<OPTGROUP LABEL="AS... Ping/Traceroute">
+<OPTION VALUE="Option 1"> Option 1
+<OPTION VALUE="Option 2"> Option 2
+<OPTION VALUE="Option 3"> Option 3
+<OPTION VALUE="Option 4"> Option 4
+<OPTION VALUE="Option 5"> Option 5
+<OPTION VALUE="Option 6"> Option 6
+<OPTION VALUE="Option 7"> Option 7
+</SELECT><BR><FONT SIZE="-1">&nbsp;&nbsp;<SUP>*</SUP>&nbsp;remote&nbsp;LG&nbsp;script</FONT></TD>
+</TR>
+<TR><TD class="lgtable" ALIGN="CENTER" COLSPAN=3>
+<INPUT TYPE="SUBMIT" onClick="makeEnable()" VALUE="Submit"> | 
+<INPUT TYPE="RESET" VALUE="Reset"> 
+</TD></TR>
+</TABLE>
+</TD></TR></TABLE>
+</CENTER>
+<P>
+</FORM>
+<P>
+<HR SIZE="2" WIDTH="85%" NOSHADE>
+<CENTER><FONT SIZE ="-3">You are connected from IP: {{ . }}</p>
+</FONT></CENTER><CENTER><FONT SIZE ="-3">Disclaimer: Your mileage may vary...
+</FONT></CENTER>
+<P>
+<CENTER>
+<P>
+</CENTER>
+        <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+        try{
+        var pageTracker = _gat._getTracker("UA-9015291-2"); pageTracker._setDomainName(".internode.on.net");
+        pageTracker._setAllowLinker(true);
+        pageTracker._setAllowHash(false);
+        pageTracker._trackPageview();
+        } catch(err) {}
+        </script>
+
+</BODY>
+</HTML>
